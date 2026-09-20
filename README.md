@@ -4,14 +4,14 @@ A high-performance full-stack monorepo powered by [Turborepo](https://turbo.buil
 
 ## 🚀 Tech Stack
 
-| Workspace | Technology | Description | Default Port / URL |
-| :--- | :--- | :--- | :--- |
-| **`apps/web`** | **[Next.js 16](https://nextjs.org/)** (React 19, Turbopack) | Frontend Web Application (App Router) | `http://localhost:3000` |
-| **`apps/api`** | **[NestJS 12](https://nestjs.com/)** (TypeScript, Vitest, Oxlint) | Backend REST API Service | `http://localhost:4000` |
-| **`apps/mobile`** | **[Expo SDK 57](https://expo.dev/)** (React Native 0.86, Expo Router) | Cross-Platform Mobile Application (iOS, Android, Web) | `http://localhost:8081` |
-| **`packages/ui`** | React Component Library | Shared UI components across frontend applications | — |
-| **`packages/eslint-config`** | ESLint Flat Config | Shared linting rules across apps & packages | — |
-| **`packages/typescript-config`** | TypeScript Configurations | Shared `tsconfig.json` bases across workspace | — |
+| Workspace                        | Technology                                                            | Description                                           | Default Port / URL      |
+| :------------------------------- | :-------------------------------------------------------------------- | :---------------------------------------------------- | :---------------------- |
+| **`apps/web`**                   | **[Next.js 16](https://nextjs.org/)** (React 19, Turbopack)           | Frontend Web Application (App Router)                 | `http://localhost:3000` |
+| **`apps/api`**                   | **[NestJS 12](https://nestjs.com/)** (TypeScript, Vitest, Oxlint)     | Backend REST API Service                              | `http://localhost:4000` |
+| **`apps/mobile`**                | **[Expo SDK 57](https://expo.dev/)** (React Native 0.86, Expo Router) | Cross-Platform Mobile Application (iOS, Android, Web) | `http://localhost:8081` |
+| **`packages/ui`**                | React Component Library                                               | Shared UI components across frontend applications     | —                       |
+| **`packages/eslint-config`**     | ESLint Flat Config                                                    | Shared linting rules across apps & packages           | —                       |
+| **`packages/typescript-config`** | TypeScript Configurations                                             | Shared `tsconfig.json` bases across workspace         | —                       |
 
 ---
 
@@ -56,6 +56,7 @@ careersimplify/
 - **pnpm**: `>= 10.0.0` (Recommended: `11.x`)
 
 To install pnpm globally (if not already installed):
+
 ```sh
 corepack enable pnpm
 # or
@@ -77,15 +78,19 @@ pnpm install
 ## ⚡ Development
 
 ### Run all applications concurrently
+
 ```sh
 pnpm dev
 ```
+
 Turborepo will start:
+
 - **Next.js Web App**: [http://localhost:3000](http://localhost:3000)
 - **NestJS Backend API**: [http://localhost:4000](http://localhost:4000)
 - **Expo Mobile Dev Server**: [http://localhost:8081](http://localhost:8081)
 
 ### Run a specific application
+
 You can filter execution by app name using Turborepo `--filter`:
 
 ```sh
@@ -109,11 +114,13 @@ pnpm --filter mobile web
 ## 🏗️ Production Build
 
 ### Build all apps and packages
+
 ```sh
 pnpm build
 ```
 
 ### Build a specific app
+
 ```sh
 # Build NestJS API (outputs to apps/api/dist)
 pnpm --filter api build
@@ -130,6 +137,7 @@ pnpm --filter mobile build
 ## 🧪 Testing & Code Quality
 
 ### Run Tests
+
 ```sh
 # Run tests across workspace
 pnpm test
@@ -142,12 +150,15 @@ pnpm --filter api test:e2e
 ```
 
 ### Type Checking
+
 Run TypeScript type-checks across all apps and packages:
+
 ```sh
 pnpm check-types
 ```
 
 ### Linting & Formatting
+
 ```sh
 # Lint all workspaces
 pnpm lint
@@ -161,6 +172,7 @@ pnpm format
 ## ➕ Adding Dependencies & Packages
 
 ### Add a dependency to a specific application
+
 ```sh
 # Add an npm package to apps/web
 pnpm --filter web add axios
@@ -173,7 +185,9 @@ pnpm --filter mobile add -D @types/react-native
 ```
 
 ### Consume a shared workspace package
+
 To consume `@repo/ui` in an app, reference it in that app's `package.json`:
+
 ```json
 {
   "dependencies": {
