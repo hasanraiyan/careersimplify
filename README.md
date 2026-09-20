@@ -191,3 +191,17 @@ The monorepo was scaffolded using the official CLI commands:
 - **Turborepo**: `pnpm dlx create-turbo@latest . --package-manager pnpm`
 - **NestJS API**: `pnpm dlx @nestjs/cli new api --directory apps/api -p pnpm -g --skip-install --no-observe`
 - **Expo App**: `pnpm dlx create-expo-app@latest apps/mobile -y --no-install`
+
+---
+
+## 🤖 Continuous Integration (GitHub Actions)
+
+The repository includes preconfigured GitHub Actions pipelines located in [`.github/workflows/`](.github/workflows/):
+
+- **[`ci.yml`](.github/workflows/ci.yml)**: Runs on every PR and push to `main`.
+  - Sets up pnpm and Node.js 24 with package caching.
+  - Runs `pnpm lint`, `pnpm check-types`, `pnpm test`, NestJS e2e tests, and full production `pnpm build`.
+  - Supports Turborepo Remote Caching if `TURBO_TOKEN` and `TURBO_TEAM` secrets are added in GitHub repository settings.
+- **[`expo-preview.yml`](.github/workflows/expo-preview.yml)**: Runs when changes are made to `apps/mobile/**`.
+  - Verifies Expo bundle export for mobile.
+  - Can be extended with `EXPO_TOKEN` secret to publish EAS update channels or preview builds.
