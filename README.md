@@ -202,6 +202,14 @@ The repository includes preconfigured GitHub Actions pipelines located in [`.git
   - Sets up pnpm and Node.js 24 with package caching.
   - Runs `pnpm lint`, `pnpm check-types`, `pnpm test`, NestJS e2e tests, and full production `pnpm build`.
   - Supports Turborepo Remote Caching if `TURBO_TOKEN` and `TURBO_TEAM` secrets are added in GitHub repository settings.
-- **[`expo-preview.yml`](.github/workflows/expo-preview.yml)**: Runs when changes are made to `apps/mobile/**`.
-  - Verifies Expo bundle export for mobile.
-  - Can be extended with `EXPO_TOKEN` secret to publish EAS update channels or preview builds.
+- **[`build-android.yml`](.github/workflows/build-android.yml)**: Builds native Android **APK** and **AAB** (Google Play Store) packages directly on GitHub Actions runners without requiring Expo EAS paid tiers.
+  - Triggerable on-demand via GitHub Actions `workflow_dispatch` with options: `apk`, `aab`, or `both`.
+  - Automatically runs Expo native prebuild (`npx expo prebuild --platform android`).
+  - Sets up Java 17, Android SDK, and Gradle cache.
+  - Automatically bumps and commits `versionCode` in `apps/mobile/app.json` on release builds.
+  - Injects release keystore signing if GitHub Secrets are provided:
+    - `ANDROID_KEYSTORE_BASE64`: Base64-encoded `.jks` / `.keystore` file.
+    - `ANDROID_KEYSTORE_PASSWORD`: Keystore password.
+    - `ANDROID_KEY_ALIAS`: Key alias.
+    - `ANDROID_KEY_PASSWORD`: Key password.
+  - Uploads generated `.apk` and `.aab` artifacts to GitHub Actions run artifacts (retained for 14 days).
